@@ -1,3 +1,22 @@
+<!-- NOTES
+-passing in post[name] gives back a nested params hash 
+-post parameters do not get stored in the url like get parameters from a form.
+-question 1 - do value attributes change what is given in the parameter in a select box. 
+-answer 1 - if you select something from the select box, the value of that select box attribute is what is passed as a parameter.
+-question 2 - How does Sinatra know to run index.rb first? 
+-question 3 - If there are multiple files in a Sinatra app what configures them to all be included and know eachother are there. Especially controllers.
+-question 4 - Is a get request form less secure for the user and the site since params are passed in the header?
+-question 5 - is this Index.erb file just setting up listeners kinda like javascript for these routes that are inputted from the browser?
+- question 6 - How does Sinatra take in a http request and map it to the index.erb methods get and post correctly?
+- question 7 - if multiple checkboxes are selected can I get both in the params if I give them different names.
+- answer 7 - yes if you give them different name attributes they will give 2 separate params hash elements back.
+
+
+
+
+
+-->
+
 <style type="text/css">
   .container {
     margin: 20px auto;
@@ -11,25 +30,50 @@
 </style>
 
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
-
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+  <h2> Get form for cool/url </h2>
+  <form action="/cool_url" method="get">
+    <input type="text" name="post[name]" placeholder="name">
+    <div style="margin: 20px 0 0 ;">
+      <textarea rows=5 cols=50 name="life_story"></textarea>
+    </div>
+    <div style="margin: 20px 0 0 ;"> Where do you want to go?</div>
+    <input type="radio" name="where_go" value="Aruba"> Aruba<br>
+    <input type="radio" name="where_go" value="Bahamas" checked> Bahamas<br>
+    <input type="radio" name="where_go" value="Come on pretty mama"> Come on pretty mama
+    <div style="margin: 20px 0 0 ;"> Where you want to live? You can choose multiple</div>
+    <input type="checkbox" name="live" value="Chicago"> Chi City<br>
+    <input type="checkbox" name="live2" value="New York" checked> New York<br>
+    <input type="checkbox" name="live3" value="San Francisco"> San Francisco<br>
+    <div style="margin: 20px 0 0 ;"></div>
+    <select name="breakfast">
+      <option>Favorite breakfast</option>
+      <option>Milk</option>
+      <option>Coffee</option>
+      <option>Tea</option>
+    </select>
+    <br><input type="submit" value="submit">
+  </form>
+  <h2> post form for cool/url </h2>
+  <form action="/cool_url" method="post">
+    <input type="text" name="name" placeholder="name">
+    <div style="margin: 20px 0 0 ;">
+      <textarea rows=5 cols=50 name="life_story"></textarea>
+    </div>
+    <div style="margin: 20px 0 0 ;"> Where do you want to go?</div>
+    <input type="radio" name="where_go" value="Aruba"> Aruba<br>
+    <input type="radio" name="where_go" value="Bahamas" checked> Bahamas<br>
+    <input type="radio" name="where_go" value="Come on pretty mama"> Come on pretty mama
+    <div style="margin: 20px 0 0 ;"> Where you want to live? You can choose multiple</div>
+    <input type="checkbox" name="live" value="Chicago">Chi City<br>
+    <input type="checkbox" name="live2" value="New York" checked> New York<br>
+    <input type="checkbox" name="live3" value="San Francisco"> San Francisco<br>
+    <div style="margin: 20px 0 0 ;"></div>
+    <select name="breakfast">
+      <option value = "hey">Favorite breakfast</option>
+      <option>Milk</option>
+      <option>Coffee</option>
+      <option>Tea</option>
+    </select>
+    <br><input type="submit" value="submit">
+  </form>
 </div>
